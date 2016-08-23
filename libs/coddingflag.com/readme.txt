@@ -1,0 +1,1 @@
+resourcess ini diambil dari http://codingflag.in/mysketch.php?sketch=47
