@@ -1,248 +1,333 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Login Link Manager</title>
 
-	<style type="text/css">
-		/* Import Lib. and Fonts */
-@import 'https://daneden.github.io/animate.css/animate.min.css';
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+		<meta name="description" content="User login page" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="http://localhost/perpustakaan-link/themes/aceadmin/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/font-awesome.min.css" />
+		<!-- text fonts -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/ace-fonts.css" />
 
-* {
-  box-sizing: border-box;
-}
+		<!-- ace styles -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/ace.min.css" />
 
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif,"Open Sans";
-}
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="../assets/css/ace-part2.min.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/ace-rtl.min.css" />
 
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  background-color: #292931;
-  color: #606468;
-  font: 400 0.875rem/1.5 "Open Sans","source sans pro",sans-serif;
-}
-.signin-form {
-  width: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform:translate(-50%,-50%);
-  -webkit-transform:translate(-50%,-50%);
-  transform:translate(-50%,-50%);
-}
-.signin-form h2 {
-  margin: 22px;
-  text-align: center;
-  font-size: 35px;
-  font-family:sans-serif,'source sans pro';
-  font-weight: 600;
-  color: #d0d3d4;
-}
-.signin-form .form-row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 17px;
-}
-.signin-form input {
-  margin: 0;
-  width: 100%;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  border: 0;
-  outline: 0;
-  -moz-transition: background-color .2s linear;
-  -webkit-transition: background-color .2s linear;
-  transition: background-color .2s linear;
-}
-.form label,
-.form input[type="text"],
-.form input[type="password"] {
-  padding: 10px;
-  border-radius: 3px;
-}
-.form label {
-  font-size: 20px;
-  color: #e7e7e7;
-  background-color: #363b41;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-.form input[type="text"], .form input[type="password"] {
-  color: #eee;
-  background-color: #3b4148;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-.form input[type="text"]:focus, .form input[type="text"]:hover, .form input[type="password"]:focus, .form input[type="password"]:hover {
-  background-color: #434A52;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-.form #signin {
-  opacity: 0;
-  display: none;
-}
-.form .virtual-signin {
-  position: absolute;
-  left: 50%;
-  margin-top:10px;
-  transform:translate(-50%,0);
-}
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>themes/aceadmin/css/ace.onpage-help.css" />
 
-.signin-label {
-  padding-left: 10px;
-}
-.fontawesome-unlock {
-  color: #fff;
-  font-size: 32px;
-}
-.unlock {
-  font-size: 30px;
-}
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-/* Gear Effects */
-#gear {
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: url(http://i.imgur.com/lOBxb.png);
-  -moz-animation: gear 2s infinite ease-in;
-  -webkit-animation: gear 2s infinite ease-in;
-  animation: gear 2s infinite linear;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-  -webkit-animation-play-state: running;
-  animation-play-state: running;
-}
-@-webkit-keyframes gear {
-  0% { -webkit-transform: rotate(0deg);transform: rotate(0deg);}
-  100% { -webkit-transform: rotate(360deg);transform: rotate(360deg); }
-}
-@-moz-keyframes gear {
-  0% { -webkit-transform: rotate(0deg);transform: rotate(0deg);}
-  100% { -webkit-transform: rotate(360deg);transform: rotate(360deg); }
-}
-@keyframes gear {
-  0% { -webkit-transform: rotate(0deg);transform: rotate(0deg);}
-  100% { -webkit-transform: rotate(360deg);transform: rotate(360deg); }
-}
-.row{
-float:left;
-}
-	</style>
-</head>
-<body>
+		<!--[if lt IE 9]>
+		<script src="../assets/js/html5shiv.js"></script>
+		<script src="../assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
 
-<div id="container">
-	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!--
-NOTE :- Put above JQuery Library in starting of 'HEAD' tag.
--->
-<div class="signin-form">
-  <form class="form">
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="fa fa-link" aria-hidden="true"></i>
+									<span class="red">Links Manager</span>
+									<span class="white" id="id-text2">Application</span>
+								</h1>
+							</div>
+							<div class="space-6"></div>
 
-    <h2>Masuk</h2>
-    
-    <div class="form-row">
-      <label class="fontawesome-user" for="username"></label>
-      <input id="username" type="text" placeholder="Enter Username" required>
-    </div>
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-coffee green"></i>
+												Please Enter Your Information
+											</h4>
 
-    <div class="form-row">
-      <label class="fontawesome-key" for="password"></label>
-      <input id="password" type="password" placeholder="Enter Password" required>
-    </div>
+											<div class="space-6"></div>
 
-    <div class="form-row">
-		<span class="virtual-signin">
-        <label style="background:#377dd2;" class="fontawesome-lock" for="signin">
-          <span class="signin-label">Masuk</span>
-        </span>
-		<div class="col">
-		<span class="virtual-signin">
-        <label style="background:#377dd2;" class="fontawesome-lock" for="signin">
-          <span class="signin-label">Ok</span>
-        </span>
-       <input type="button" id="signin">
-	   </div>
-	   <div class="col">
-		<span class="virtual-batal">
-        <label style="background:#377dd2;" class="fontawesome-lock" for="signin">
-          <span class="batal-label">batal</span>
-        </span>
-       <input type="button" id="batal">
-	   </div>
-	   
-    </div>
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" placeholder="Username" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
 
-  </form>
-</div>
-</div>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" placeholder="Password" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
 
-</body>
-<script>
-$(document).ready(function (){
-  $('.virtual-signin').click(function(){
-      
-      var username = $('#username').val();
-      var password = $('#password').val();
+													<div class="space"></div>
 
-      if(username == '' && password == '')
-      {
-          $(".form").addClass('animated bounce');
-          $(".form").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-              $(this).removeClass('animated bounce');
-          });
-      }
-      else if (username == '')
-      {
-          $("#username").addClass('animated shake');
-          $("#username").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-              $(this).removeClass('animated shake');
-          });
-      }
-      else if(password == '')
-      {
-          $("#password").addClass('animated shake');
-          $("#password").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-              $(this).removeClass('animated shake');
-          });
-      }
-      else 
-      {
-          setTimeout(function(){
-            $('.virtual-signin').html('<i id="gear"></i>')
-          }, 0000);
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"> Remember Me</span>
+														</label>
 
-          /* Check User-Data with Database and Display Result */
-          setTimeout(function(){
-            $('.virtual-signin').html('<span class="fontawesome-unlock unlock"></span>')
-          }, 5000);
+														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="ace-icon fa fa-key"></i>
+															<span class="bigger-110">Login</span>
+														</button>
+													</div>
 
-          /* Sign-in successful Message */ 
-          setTimeout(function(){
-            $('.signin-form').addClass('animated fadeOut');
-            $(".signin-form").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                $(this).removeClass('animated fadeOut');
-            });
-            $('.signin-form').html('<h2 class="Successful">Sign-In Successful</h2>');
-          }, 7000);
-      }
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
 
-  });
-});
+											<div class="social-or-login center">
+												<span class="bigger-110">Or Login Using</span>
+											</div>
+
+											<div class="space-6"></div>
+
+											<div class="social-login center">
+												<a class="btn btn-primary">
+													<i class="ace-icon fa fa-facebook"></i>
+												</a>
+
+												<a class="btn btn-info">
+													<i class="ace-icon fa fa-twitter"></i>
+												</a>
+
+												<a class="btn btn-danger">
+													<i class="ace-icon fa fa-google-plus"></i>
+												</a>
+											</div>
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar clearfix">
+											<div>
+												<a href="#" data-target="#forgot-box" class="forgot-password-link">
+													<i class="ace-icon fa fa-arrow-left"></i>
+													I forgot my password
+												</a>
+											</div>
+
+											<div>
+												<a href="#" data-target="#signup-box" class="user-signup-link">
+													I want to register
+													<i class="ace-icon fa fa-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.login-box -->
+
+								<div id="forgot-box" class="forgot-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												Retrieve Password
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												Enter your email and to receive instructions
+											</p>
+
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" placeholder="Email" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													<div class="clearfix">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+															<i class="ace-icon fa fa-lightbulb-o"></i>
+															<span class="bigger-110">Send Me!</span>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div><!-- /.widget-main -->
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												Back to login
+												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.forgot-box -->
+
+								<div id="signup-box" class="signup-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header green lighter bigger">
+												<i class="ace-icon fa fa-users blue"></i>
+												New User Registration
+											</h4>
+
+											<div class="space-6"></div>
+											<p> Enter your details to begin: </p>
+
+											<form>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" placeholder="Email" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" placeholder="Username" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" placeholder="Password" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" placeholder="Repeat password" />
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+													</label>
+
+													<label class="block">
+														<input type="checkbox" class="ace" />
+														<span class="lbl">
+															I accept the
+															<a href="#">User Agreement</a>
+														</span>
+													</label>
+
+													<div class="space-24"></div>
+
+													<div class="clearfix">
+														<button type="reset" class="width-30 pull-left btn btn-sm">
+															<i class="ace-icon fa fa-refresh"></i>
+															<span class="bigger-110">Reset</span>
+														</button>
+
+														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
+															<span class="bigger-110">Register</span>
+
+															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div>
+
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												<i class="ace-icon fa fa-arrow-left"></i>
+												Back to login
+											</a>
+										</div>
+									</div><!-- /.widget-body -->
+								</div><!-- /.signup-box -->
+							</div><!-- /.position-relative -->
+
+							<div class="navbar-fixed-top align-right">
+								<br />
+								&nbsp;
+								<a id="btn-login-dark" href="#">Dark</a>
+								&nbsp;
+								<span class="blue">/</span>
+								&nbsp;
+								<a id="btn-login-blur" href="#">Blur</a>
+								&nbsp;
+								<span class="blue">/</span>
+								&nbsp;
+								<a id="btn-login-light" href="#">Light</a>
+								&nbsp; &nbsp; &nbsp;
+							</div>
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='<?php echo base_url(); ?>themes/aceadmin/js/jquery.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='../assets/js/jquery1x.min.js'>"+"<"+"/script>");
 </script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo base_url(); ?>themes/aceadmin/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			jQuery(function($) {
+			 $(document).on('click', '.toolbar a[data-target]', function(e) {
+				e.preventDefault();
+				var target = $(this).data('target');
+				$('.widget-box.visible').removeClass('visible');//hide others
+				$(target).addClass('visible');//show target
+			 });
+			});
+			
+			
+			
+			//you don't need this, just used for changing background
+			jQuery(function($) {
+			 $('#btn-login-dark').on('click', function(e) {
+				$('body').attr('class', 'login-layout');
+				$('#id-text2').attr('class', 'white');
+				$('#id-company-text').attr('class', 'blue');
+				
+				e.preventDefault();
+			 });
+			 $('#btn-login-light').on('click', function(e) {
+				$('body').attr('class', 'login-layout light-login');
+				$('#id-text2').attr('class', 'grey');
+				$('#id-company-text').attr('class', 'blue');
+				
+				e.preventDefault();
+			 });
+			 $('#btn-login-blur').on('click', function(e) {
+				$('body').attr('class', 'login-layout blur-login');
+				$('#id-text2').attr('class', 'white');
+				$('#id-company-text').attr('class', 'light-blue');
+				
+				e.preventDefault();
+			 });
+			 
+			});
+		</script>
+	</body>
 </html>
